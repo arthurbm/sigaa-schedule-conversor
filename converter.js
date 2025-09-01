@@ -1,5 +1,6 @@
 // Constants and main conversion logic
 const WEEKDAY_MAP = {
+  1: "DOM",
   2: "SEG",
   3: "TER",
   4: "QUA",
@@ -9,26 +10,26 @@ const WEEKDAY_MAP = {
 };
 
 const SCHEDULE_MAP = {
-  M1: { start: "08:00", end: "08:55" },
-  M2: { start: "08:55", end: "09:50" },
-  M3: { start: "10:00", end: "10:55" },
-  M4: { start: "10:55", end: "11:50" },
-  M5: { start: "12:00", end: "12:55" },
-  M6: { start: "12:55", end: "13:50" },
-  T1: { start: "12:55", end: "13:50" },
-  T2: { start: "14:00", end: "14:55" },
-  T3: { start: "14:55", end: "15:50" },
-  T4: { start: "16:00", end: "16:55" },
-  T5: { start: "16:55", end: "17:50" },
-  T6: { start: "18:00", end: "18:55" },
-  T7: { start: "18:55", end: "19:50" },
-  N1: { start: "19:00", end: "19:50" },
-  N2: { start: "19:50", end: "20:40" },
-  N3: { start: "20:50", end: "21:40" },
-  N4: { start: "21:40", end: "22:30" },
+  M1: { start: "07:00", end: "07:50" },
+  M2: { start: "08:00", end: "08:50" },
+  M3: { start: "09:00", end: "09:50" },
+  M4: { start: "10:00", end: "10:50" },
+  M5: { start: "11:00", end: "11:50" },
+  T1: { start: "12:00", end: "12:50" },
+  T2: { start: "13:00", end: "13:50" },
+  T3: { start: "14:00", end: "14:50" },
+  T4: { start: "15:00", end: "15:50" },
+  T5: { start: "16:00", end: "16:50" },
+  T6: { start: "17:00", end: "17:50" },
+  N1: { start: "18:00", end: "18:50" },
+  N2: { start: "18:50", end: "19:40" },
+  N3: { start: "19:40", end: "20:30" },
+  N4: { start: "20:30", end: "21:20" },
+  N5: { start: "21:20", end: "22:10" },
+  N6: { start: "22:10", end: "23:00" },
 };
 
-const SCHEDULE_PATTERN = /\b([2-7]{1,5})([MTN])([1-7]{1,7})\b/gm;
+const SCHEDULE_PATTERN = /\b([1-7]{1,7})([MTN])([1-6]{1,6})\b/gm;
 
 function translateSchedule(match, weekday, shift, periods) {
   try {
@@ -87,11 +88,6 @@ function processSchedules() {
     node.textContent = node.textContent.replace(
       SCHEDULE_PATTERN,
       translateSchedule
-    );
-
-    node.textContent = node.textContent.replace(
-      /([A-Z]{3}) 12:00-12:55 \1 12:55-13:50/gm,
-      "$1 12:00-13:50"
     );
   }
 }
