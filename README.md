@@ -109,6 +109,50 @@ A extensão funciona nas seguintes páginas do SIGAA:
 - Portal do discente
 - Listagem pública de turmas
 
+## 🧪 Como Testar
+
+### Método 1: Usando uma página do SIGAA
+1. Acesse qualquer página do SIGAA que contenha horários (ex: grade de horários, turmas)
+2. Carregue a extensão no Chrome
+3. Clique no ícone da extensão
+4. Teste o botão "Converter Horários"
+5. Verifique se os códigos como `24T34` foram convertidos para `SEG 14:00-15:50 QUA 14:00-15:50`
+
+### Método 2: Teste local com HTML
+1. Crie um arquivo HTML de teste com conteúdo como:
+```html
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Disciplina: Programação - 24T34</p>
+    <p>Matemática: 357N12</p>
+    <p>Física: 1M345</p>
+</body>
+</html>
+```
+2. Abra o arquivo no Chrome
+3. Execute a extensão e verifique as conversões
+
+### Método 3: Teste no Console do DevTools
+1. Abra qualquer página
+2. Pressione F12 para abrir o DevTools
+3. Na aba Console, cole o código do `converter.js`
+4. Execute as funções de teste:
+```javascript
+// Adicionar texto de teste à página
+document.body.innerHTML += '<p>Teste: 24T34, 357N12, 1M345</p>';
+
+// Executar conversão
+processSchedules();
+```
+
+### Casos de Teste Recomendados
+- `24T34` → `SEG 14:00-15:50 QUA 14:00-15:50`
+- `357N12` → `TER 19:40-20:30 QUI 19:40-20:30 SEX 19:40-20:30 SAB 19:40-20:30`
+- `1M345` → `DOM 09:00-11:50`
+- `7T6` → `SAB 17:00-17:50`
+- `2N1` → `SEG 18:00-18:50`
+
 ## 👨‍💻 Desenvolvimento
 
 ### Tecnologias
